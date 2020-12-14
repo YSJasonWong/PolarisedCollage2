@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+	<meta name="keywords" content="polarised collage">
+	<meta name="description" content="by Jason Wong">
+	<meta name="author" content="Jason Wong 56298114">
+	<title>POLARISED COLLAGE by Jason Wong</title>
+	<script>
+function initComparisons() {
+  var x, i;
+  /*find all elements with an "overlay" class:*/
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /*once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function:*/
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /*get the width and height of the img element*/
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /*set the width of the img element to 50%:*/
+    img.style.width = (w / 2) + "px";
+    /*create slider:*/
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /*insert slider*/
+    img.parentElement.insertBefore(slider, img);
+    /*position the slider in the middle:*/
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /*execute a function when the mouse button is pressed:*/
+    slider.addEventListener("mousedown", slideReady);
+    /*and another function when the mouse button is released:*/
+    window.addEventListener("mouseup", slideFinish);
+    /*or touched (for touch screens:*/
+    slider.addEventListener("touchstart", slideReady);
+    /*and released (for touch screens:*/
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /*prevent any other actions that may occur when moving over the image:*/
+      e.preventDefault();
+      /*the slider is now clicked and ready to move:*/
+      clicked = 1;
+      /*execute a function when the slider is moved:*/
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
+    }
+    function slideFinish() {
+      /*the slider is no longer clicked:*/
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /*if the slider is no longer clicked, exit this function:*/
+      if (clicked == 0) return false;
+      /*get the cursor's x position:*/
+      pos = getCursorPos(e)
+      /*prevent the slider from being positioned outside the image:*/
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /*execute a function that will resize the overlay image according to the cursor:*/
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = e || window.event;
+      /*get the x positions of the image:*/
+      a = img.getBoundingClientRect();
+      /*calculate the cursor's x coordinate, relative to the image:*/
+      x = e.pageX - a.left;
+      /*consider any page scrolling:*/
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /*resize the image:*/
+      img.style.width = x + "px";
+      /*position the slider:*/
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+  </head>
+  <body>
+	  <header class="topnav">
+		  <a href="#contact">ABOUT</a>
+		  <a href="#process">PROCESS</a>
+		  <a href="#outcome">OUTCOME</a>
+		  <a href="#background">BACKGROUND</a>
+		  <a href="#home">HOME</a>
+	  </header>
+	  
+	  <a id="title" href="#home">POLARISED COLLAGE</a>
+	  
+	  <div id="home">
+		  <h1>Polarised Collage<br>Here to talk about it...</h1>
+	  </div>
+	  
+	  <div id="background">
+		  <ul>
+			  <li>
+				  <h2>Background</h2>
+				  <span style="text-align: left;">When it comes to politics, in Hong Kong, there are two stances against each other. The project aims to investigate the elements that both stances focused on and ignored. There will be some hidden contents because the law has banned people from discussing them, conceive that the fact can be hidden.</span>
+			  </li>
+			  <li>
+				  <h2>Concept</h2>
+				  <span style="text-align:left;">By using polarized lenses, the two sides of the vision of the audiences can only show the words or graph of what the particular stances have always been ignored. Through the contrast of the content shown, the audiences are encouraged to think whether they have missed something with the fact or stand for the stance they support in a more strong belief.</span>
+			  </li>
+		  </ul>
+	  </div>
+	  
+	  <div id="outcome" style="text-align: center;">
+		  <h2>Video Documentation</h2>
+		  <iframe  src="https://vimeo.com/490654872" width="600" height="auto" style="width: 60%;"></iframe>
+		  <h2>Experience playground</h2>
+		  <script id="interactiveA" src="sketch.js"></script>
+		  <span>Virtual outcome for demonstration only, your experience may be different from reality.</span>
+<!--
+		  <div style="" class="img-comp-container">
+			  <div class="img-comp-img">
+				  <img alt="" src="assets/1.jpg" width="100">
+			  </div>
+			  <div class="img-comp-img img-comp-overlay">
+				  <img alt="" src="assets/2.jpg" width="100">
+			  </div>
+		  </div>
+-->
+		  <script>initComparisons();</script>
+	  </div>
+	  
+	  
+	  <div id="process">
+		  <h2>Process</h2>
+		  <h3>Research</h3>
+		  <div id="research1text">
+		  <span style="font-size: 30px;">1. Infographic design from <a href="https://www.facebook.com/localstudiohongkong/photos" target="_blank" style="color: rgba(255,202,0,1.00); text-decoration: none;" alt="Local Studio HK Facebook Page">Local Studio HK</a></span><br><br><br><br>
+		  <span style="text-align: left;">This is a Facebook page active in the local affairs. The artist claimed that Hong Kong is different from China. The contrasting information defines Hong Kong's independences clearly. The contrasting techniques is old but still works today.</span>
+		  </div>
+	    <div id="research1img">
+		  <div class="slideshow-container" >
+			  <div class="mySlides fade"><div class="numbertext">1 / 6</div><img alt="" src="assets/info1.png" style="width:100%"></div>
+			  <div class="mySlides fade"><div class="numbertext">2 / 6</div><img alt="" src="assets/info2.png" style="width:100%"></div>
+			  <div class="mySlides fade"><div class="numbertext">3 / 6</div><img alt="" src="assets/info3.png" style="width:100%"></div>
+			  <div class="mySlides fade"><div class="numbertext">4 / 6</div><img alt="" src="assets/info4.png" style="width:100%"></div>
+			  <div class="mySlides fade"><div class="numbertext">5 / 6</div><img alt="" src="assets/info5.png" style="width:100%"></div>
+			  <div class="mySlides fade"><div class="numbertext">6 / 6</div><img alt="" src="assets/info6.png" style="width:100%"></div>
+			  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+			  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+		  </div><br>
+		  <div style="text-align:center">
+			  <span class="dot" onclick="currentSlide(1)"></span>
+			  <span class="dot" onclick="currentSlide(2)"></span>
+			  <span class="dot" onclick="currentSlide(3)"></span>
+			  <span class="dot" onclick="currentSlide(4)"></span>
+			  <span class="dot" onclick="currentSlide(5)"></span>
+			  <span class="dot" onclick="currentSlide(6)"></span>
+		  </div><br>
+		  </div>
+		  <script>
+			  var slideIndex = 1;
+			  showSlides(slideIndex);
+			  
+			  function plusSlides(n) {
+				  showSlides(slideIndex += n);
+			  }
+			  
+			  function currentSlide(n) {
+				  showSlides(slideIndex = n);
+			  }
+			  
+			  function showSlides(n) {
+				  var i;
+				  var slides = document.getElementsByClassName("mySlides");
+				  var dots = document.getElementsByClassName("dot");
+				  if (n > slides.length) {slideIndex = 1}
+				  if (n < 1) {slideIndex = slides.length}
+				  for (i = 0; i < slides.length; i++) {
+					  slides[i].style.display = "none";
+				  }
+				  for (i = 0; i < dots.length; i++) {
+					  dots[i].className = dots[i].className.replace(" active", "");
+				  }
+				  slides[slideIndex-1].style.display = "block";
+				  dots[slideIndex-1].className += " active";
+			  }
+		  </script>
+		  <div id="research2img">
+	      <img src="assets/split.png" alt="" width="100" style="width: 60%;"/>
+		  </div>
+		  <div id="research2text">
+	  			<span style="font-size: 30px">2. Polarized portrait by Dino Tomic</span><br><br>
+			  <span>He use transparent tapes to organise the polarising direction of light. The outcome of his work is the portrait of Kevin from the movie 'Split'. In the very beginning of this project, I have been thinking about having the protester wearing a mask in the canvas, as they are what we remember of the movement. Dino Tomic is a professional character artist, I like the way that he uses tiny shapes to form detailed facial contour. I want to make this project unique. Therefore, I considerd making a collage art that whenever a polarsing filter is used, there are still something on the canvas.</span><br>
+    <a href="https://www.dinotomic.com/" target="_blank" style="color: rgba(255,202,0,1.00); font-size: 26px; font-style: italic;" alt="Explore about Dino Tomic">Dino Tomic</a><br>
+    <a href="https://www.instagram.com/p/BobtJO2Htie/?igshid=o8hitl3jbdxw" target="_blank" style="color: rgba(255,202,0,1.00); font-size: 26px; text-decoration: none;" alt="Related work - Polarized tape Joker Art">Related work - Polarized tape Joker Art</a>
+	    </div><br>
+		  <h2 style="clear: both;">Implementation</h2><br>
+	    <div >
+			  
+			  <button class="implementation">Draft Composition</button>
+			  <div class="panel">
+				  <img src="assets/IMG_0451.PNG" id="DCimg1" alt=""/>
+				  <img src="assets/IMG_0452.PNG" id="DCimg2" alt=""/><br>
+				  <span>1. Draw the portrait of the two characters, one in black, another in white.</span><br>
+				  <img src="assets/IMG_0453.PNG" id="DCimg3" alt=""/><br>
+				  <span>2. Set medium grey as backgound color so that both black and white vector shape can be seen.</span><br>
+				  <span>3. By compare the overlapping parts, I am able to make choices of which line/shapes I am keeping.</span>
+			  </div>
+		  <button class="implementation">Check Polarising Direction</button>
+		  <div class="panel" style="text-align: left;">
+			  <img src="assets/BoneStress_DSC_7449_H.jpg" id="PDimg1" width="960" height="916" style="width: 35%; height: auto;padding: 0%" alt=""/>
+			  <img src="assets/IMG_6172.JPG" id="PDimg2" width="auto" height="916" style="width: 60%; height: auto; padding: 0%; " alt=""/><br>
+			  <span style="text-align: left;"> The bone stress of plastic will affect the transmittance of polarised light. There are two ways to change the transmittance, the first one is to rotate the filter, the second one is to rotate the transparent plastic plate. As the rotation of filter is not static, the only way to ensure the portrait is in binary color is to paste the transparent film in correct rotation in advance.</span><br>
+			  <span><span style="color: rgba(255,202,0,1.00);">Transparent Canvas</span> = <span style="color: rgba(255,202,0,1.00);">perpendicular to top polarizer</span> = <span style="color: rgba(255,202,0,1.00);">perpendicular to portrait of protesters</span></span>
+			  </div>
+		  <button class="implementation">Cut and Paste</button>
+		  <div class="panel">
+			  <img id="CPimg1" src="assets/DSCF6266.JPG" alt=""/>
+			  <img id="CPimg2" src="assets/DSCF6265.JPG" alt=""/><br>
+			  <span></span>
+			  </div>
+		  <script>
+				  var acc = document.getElementsByClassName("implementation");
+				  var i;
+				  for (i = 0; i < acc.length; i++) {
+					  acc[i].addEventListener("click", function() {
+						  this.classList.toggle("implementationactive");
+						  var panel = this.nextElementSibling;
+						  if (panel.style.maxHeight) {
+							  panel.style.maxHeight = null;
+						  } else {panel.style.maxHeight = panel.scrollHeight + "px";
+								 }
+					  });
+				  }
+			  </script>
+		  </div>
+	  </div>
+	  
+	  <div id="about" style="text-align: center;">
+		  <h2>Gallery</h2>
+		  <div class="galleryRow">
+		  <div class="gallery">
+      <img src="assets/IMG_6167.JPG" width="1920" height="auto" alt="" style="width: 100%;"/>
+	      <img src="assets/c1b7-icapxph2947418a.jpg" width="640" height="360" alt=""  style="width: 100%;"/>
+	      
+	      <img src="assets/IMG_0448.JPG" width="320" height="320" alt="" style="width: 100%;"/>
+			  </div>
+			  <div class="gallery">
+				  <img src="assets/oORqGB.png" width="500" alt="" style="width: 100%;"/>
+		      <img src="assets/free.png" width="1920" height="1080" style="width: 100%" alt=""/>
+			  </div>
+			  <div class="gallery">
+				  <img src="assets/IMG_6172.JPG" width="6000" height="3368" alt="" style="width: 100%;"/>
+		      <img src="assets/bkn-20200715154319112-0715_00822_001_01pa.jpg" width="608" height="434" style="width: 100%;" alt=""/>
+		      <img src="assets/photo_2020-10-03_22-04-26-2.jpg" width="538" height="302" alt=""/>
+			  </div>
+		  </div>
+		  <h2>Citation and References</h2>
+		  <div id="citation" style="text-align: left; padding: 0% 10%">
+			  <ul>
+				  <li>Cover picture: <a href="https://cn.wsj.com/articles/%E9%A6%99%E6%B8%AF%E8%AD%A6%E6%96%B9%E9%A6%96%E6%AC%A1%E4%BE%9D%E6%93%9A%E6%B8%AF%E7%89%88%E5%9C%8B%E5%AE%89%E6%B3%95%E9%80%AE%E6%8D%95%E6%95%B8%E7%99%BE%E5%90%8D%E6%8A%97%E8%AD%B0%E8%80%85-11593658208" target="_blank">The Wall Street Journal, 2/7/2020</a></li>
+				  <li>Local Studio HK: <a href="https://www.facebook.com/localstudiohongkong/photos" target="_blank">Facebook Page</a></li>
+				  <li>Split Tape Art by Dino Tomic: <a href="https://www.youtube.com/watch?v=w3W8WHRm-JY" target="_blank">Youtube Video</a></li>
+				  <li>photo: <a href="https://hk.on.cc/hk/bkn/cnt/news/20200728/bkn-20200728180403391-0728_00822_001.html" target="_blank">721</a></li>
+				  <li>photo: <a href="https://pttnews.cc/6d0423e305" target="_blank">PTT News</a></li>
+				  <li>photo: <a href="https://mdd.hkgolden.com/view.aspx?message=7150602&type=CA&page=2" target="_blank">forum.hkgolden.com</a></li>
+				  <li>Background music in video documentation: <a href="https://www.bensound.com" target="_blank">Bensound.com</a></li>
+			  </ul>
+		  </div>
+  </div>
+	  
+	  <div id="contact">
+			  <span>Contact Email: <span style="color: rgba(255,202,0,1.00);">jyswong3-c@my.cityu.edu.hk</span></span><br>
+			  <span>Student ID: <span style="color: rgba(255,202,0,1.00);">56298114</span></span><br>
+		  <span>SM3805 Imaging Science Studio</span><br>
+		  <span style="padding-bottom: 10%;">School of Creative Media, City University of Hong Kong</span>
+		  </div>
+	  
+	  <footer style="position: fixed; bottom: 0px; width: 100%; padding: 1% 3%; background-color: black;">
+		  <span style="font-size: 16px;">&copy;2020 Jason Wong</span>
+	  </footer>
+</body>
+</html>
