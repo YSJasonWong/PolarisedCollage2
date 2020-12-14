@@ -71,7 +71,7 @@ span,  p {
 	background-size: auto 100%;
 	background-position: center;
 	background-origin: inherit;
-	background-image: url(assets/cover.jpg);
+	background-image: url(cover.jpg);
 	background-repeat: no-repeat;
 	text-align: center;
 	padding: 20% 5%;
